@@ -21,6 +21,8 @@ add_library(aggregator-objs OBJECT
     aggregator_factory.cpp)
 set_property(TARGET aggregator-objs PROPERTY CXX_STANDARD 14)
 
+include(thirdparty.cmake)
+
 # Combine lib-objs
 set(lib-objs $<TARGET_OBJECTS:aggregator-objs>)
 
