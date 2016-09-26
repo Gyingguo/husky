@@ -27,6 +27,9 @@
 
 namespace husky {
 
+class PyHuskyMasterHandlers;
+class FrontendMasterHandlers;
+
 class Master {
    public:
     static Master& get_instance() {
@@ -51,6 +54,9 @@ class Master {
 
     inline void register_setup_handler(std::function<void()> handler) { external_setup_handlers.push_back(handler); }
 
+    friend class FrontendMasterHandlers;
+    friend class PyHuskyMasterHandlers;
+    
    protected:
     Master();
 
@@ -63,6 +69,7 @@ class Master {
     std::shared_ptr<zmq::socket_t> master_socket;
 
     // External handlers
+    FrontendMasterHandlers* frontend_master_handlers;
     std::unordered_map<uint32_t, std::function<void()>> external_main_handlers;
     std::vector<std::function<void()>> external_setup_handlers;
 };

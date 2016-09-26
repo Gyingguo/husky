@@ -36,7 +36,7 @@ namespace husky {
 #define debug_msg(msg)                     \
     do {                                   \
         if (HUSKY_DEBUG_ON)                \
-            Base::log_msg(msg, LOG_DEBUG); \
+            base::log_msg(msg, base::LOG_TYPE::LOG_DEBUG); \
     } while (0)
 
 #define ID(cls, type)                      \

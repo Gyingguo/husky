@@ -23,6 +23,7 @@
 
 #include "zmq.hpp"
 
+#include "bindings/frontend_master_handlers.hpp"
 #include "base/log.hpp"
 #include "base/serialization.hpp"
 #include "core/config.hpp"
@@ -53,6 +54,10 @@ void Master::init_socket() {
     master_socket.reset(new zmq::socket_t(zmq_context, ZMQ_ROUTER));
     master_socket->bind("tcp://*:" + std::to_string(Context::get_config()->get_master_port()));
     base::log_msg("Binded to tcp://*:" + std::to_string(Context::get_config()->get_master_port()));
+
+    // Init external handlers
+    frontend_master_handlers = new FrontendMasterHandlers();
+    frontend_master_handlers->init_master();
 }
 
 void Master::serve() {

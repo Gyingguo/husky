@@ -28,7 +28,7 @@ if(MONGOCLIENT_FOUND)
     add_definitions(-DWITH_MONGODB)
 endif(MONGOCLIENT_FOUND)
 
-set(husky husky-lib husky-io husky-core husky-base)
+set(husky husky-lib husky-io husky-core husky-base pyhusky-master)
 
 # Master
 add_executable(Master master.cpp ${master_plugins})
