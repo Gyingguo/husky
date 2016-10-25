@@ -27,7 +27,7 @@
 #include "core/utils.hpp"
 #include "core/executor.hpp"
 #include "base/log.hpp"
-#include "io/input/hdfs_line_inputformat.hpp"
+#include "io/input/line_inputformat.hpp"
 #ifdef WITH_MONGODB
 #include "io/input/mongodb_inputformat.hpp"
 #endif
@@ -136,7 +136,7 @@ bool WorkerDriver::new_instr_python_py(WorkerDriverInfo& workerdriver_info, OpDA
         std::string protocol = leave->get_op().get_param("Protocol");
         if (protocol == "hdfs") {
 #ifdef WITH_HDFS
-            io::HDFSLineInputFormat infmt;
+            husky::io::LineInputFormat infmt;
             const std::string path = leave->get_op().get_param("Path");
             infmt.set_input(path);
             husky::load(infmt, [&](boost::string_ref& chunk) {
@@ -145,7 +145,7 @@ bool WorkerDriver::new_instr_python_py(WorkerDriverInfo& workerdriver_info, OpDA
 #endif
         } else if (protocol == "mongodb") {
 #ifdef WITH_MONGODB
-            io::MongoDBInputFormat infmt;
+            husky::io::MongoDBInputFormat infmt;
             std::string server = leave->get_op().get_param("Server");
             infmt.set_server(server);
             std::string database = leave->get_op().get_param("Database");
