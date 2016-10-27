@@ -43,6 +43,7 @@ struct DaemonInfo {
     BinStream dag_bin;
     CentralRecver* recver;
     MailboxEventLoop* el;
+    LocalMailbox* mailbox;
     std::vector<LocalMailbox*> mailboxes;
     int init_param_ac;
     char** init_param_av;

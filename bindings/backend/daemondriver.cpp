@@ -91,7 +91,6 @@ void DaemonDriver::start_workers(DaemonInfo& daemon_info) {
     // Initialize mailbox sub-system
     daemon_info.el = new MailboxEventLoop(&zmq_context);
     daemon_info.el->set_process_id(worker_info.get_proc_id());
-    // std::vector<LocalMailbox*> mailboxes;
     for (int i = 0; i < worker_info.get_num_processes(); i++)
         daemon_info.el->register_peer_recver(
             i, "tcp://" + worker_info.get_host(i) + ":" + std::to_string(Context::get_config()->get_comm_port()));
@@ -99,16 +98,15 @@ void DaemonDriver::start_workers(DaemonInfo& daemon_info) {
         if (worker_info.get_proc_id(i) != worker_info.get_proc_id()) {
             daemon_info.el->register_peer_thread(worker_info.get_proc_id(i), i);
         } else {
-            auto* mailbox = new LocalMailbox(&zmq_context);
-            mailbox->set_thread_id(i);
-            daemon_info.el->register_mailbox(*mailbox);
-            daemon_info.mailboxes.push_back(mailbox);
+            daemon_info.mailbox = new LocalMailbox(&zmq_context);
+            daemon_info.mailbox->set_thread_id(i);
+            daemon_info.el->register_mailbox(*daemon_info.mailbox);
+            daemon_info.mailboxes.push_back(daemon_info.mailbox);
         }
     }
     daemon_info.recver = new CentralRecver(&zmq_context, Context::get_recver_bind_addr());
 
     // Initialize worker threads
-    // std::vector<boost::thread*> threads;
     int local_id = 0;
     for (int i = 0; i < worker_info.get_num_workers(); i++) {
         if (worker_info.get_proc_id(i) != worker_info.get_proc_id())

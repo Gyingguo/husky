@@ -23,9 +23,9 @@
 
 #include "zmq.hpp"
 
-#include "bindings/frontend_master_handlers.hpp"
 #include "base/log.hpp"
 #include "base/serialization.hpp"
+#include "bindings/frontend_master_handlers.hpp"
 #include "core/config.hpp"
 #include "core/constants.hpp"
 #include "core/context.hpp"

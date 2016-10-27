@@ -22,8 +22,6 @@
 
 namespace husky {
 
-class SchuskyMasterHandlers;
-
 struct Progress {
     unsigned worker_finished = 0;
     unsigned num_tot_worker = 0;
@@ -32,7 +30,6 @@ struct Progress {
 class FrontendMasterHandlers {
   private:
     friend PyHuskyMasterHandlers;
-    // friend SchuskyMasterHandlers;
     // master generation for tasks
     int cur_generation = 0;
     // generations of each daemon on each machine for tasks
@@ -46,7 +43,6 @@ class FrontendMasterHandlers {
   protected:
     std::deque<std::shared_ptr<Job>> pending_jobs;
     PyHuskyMasterHandlers pyhusky_master_handlers;
-    // SchuskyMasterHandlers schusky_master_handlers;
     std::unordered_map<int, Progress> task_progress;
     void inc_job_progress(int task_id) {
         auto iter = task_progress.find(task_id);

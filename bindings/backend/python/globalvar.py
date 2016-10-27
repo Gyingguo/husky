@@ -17,15 +17,6 @@ class GlobalVar:
     name_to_type = dict()
     name_to_prefunc = dict()
     name_to_postfunc = dict()
-    # reduce_res
-    # reduce_func
-    # reduce_by_key_store  
-    # reduce_by_key_list    
-    # write_to_hdfs_store
-    # write_to_hdfs_list
-    # write_to_hdfs_url
-    # edgelist_store
-    pass
 
 class GlobalSocket:
     # pipe_from_cpp

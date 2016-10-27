@@ -4,7 +4,6 @@ namespace husky {
 
 FrontendMasterHandlers::FrontendMasterHandlers() {
     pyhusky_master_handlers.parent = this;
-    // schusky_master_handlers.parent = this;
 }
 
 int FrontendMasterHandlers::dag_split(const OpDAG & dag, int task_id) {
@@ -16,7 +15,6 @@ int FrontendMasterHandlers::dag_split(const OpDAG & dag, int task_id) {
 
 void FrontendMasterHandlers::init_master() {
     pyhusky_master_handlers.init_master();
-    // schusky_master_handlers.init_master();
 }
 
 }

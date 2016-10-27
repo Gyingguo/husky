@@ -33,9 +33,9 @@ namespace husky {
 #define HUSKY_DEBUG_ON 0
 #endif
 
-#define debug_msg(msg)                     \
-    do {                                   \
-        if (HUSKY_DEBUG_ON)                \
+#define debug_msg(msg)                                     \
+    do {                                                   \
+        if (HUSKY_DEBUG_ON)                                \
             base::log_msg(msg, base::LOG_TYPE::LOG_DEBUG); \
     } while (0)
 
