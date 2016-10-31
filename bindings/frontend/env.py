@@ -32,11 +32,14 @@ def load(path):
     # In this case the list represents a list of std::string
     hlist = PyHuskyList()
     param = {
-        "Type":"cpp",
-        "Protocol": "hdfs",
+        "Type": "cpp",
         "Path": path,
         OperationParam.list_str: hlist.list_name
     }
+    if path.startswith("nfs:"):
+        param["Protocol"] = "nfs"
+    else:
+        param["Protocol"] = "hdfs"
     hlist.pending_op = Operation("Functional#load_py", param, [])
     return hlist
 

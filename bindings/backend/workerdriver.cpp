@@ -134,7 +134,7 @@ bool WorkerDriver::new_instr_python_py(WorkerDriverInfo& workerdriver_info, OpDA
     auto leave = opdag.get_leaves()[0];
     if (leave->get_op().get_name() == "Functional#load_py") {
         std::string protocol = leave->get_op().get_param("Protocol");
-        if (protocol == "hdfs") {
+        if (protocol == "hdfs" || protocol == "nfs") {
 #ifdef WITH_HDFS
             husky::io::LineInputFormat infmt;
             const std::string path = leave->get_op().get_param("Path");
